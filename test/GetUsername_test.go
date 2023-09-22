@@ -2,11 +2,11 @@ package test
 
 import (
 	"fmt"
-	apisdk "github.com/quan-xiansheng/go-api-sdk"
+	quanSdk "github.com/quan-xiansheng/go-api-sdk"
 	"testing"
 )
 
-var client = apisdk.NewApiClient("ABC", "abc")
+var client = quanSdk.NewApiClient("ABC", "abc")
 
 func TestGetUsername(t *testing.T) {
 

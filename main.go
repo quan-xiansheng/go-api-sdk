@@ -1,4 +1,4 @@
-package apisdk
+package quanSdk
 
 import (
 	"github.com/quan-xiansheng/go-api-sdk/api"
