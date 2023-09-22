@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	apisdk "github.com/quanxiangsheng/go-api-sdk"
+	apisdk "github.com/quan-xiansheng/go-api-sdk"
 	"testing"
 )
 

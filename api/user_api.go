@@ -5,7 +5,7 @@ import (
 	"github.com/duke-git/lancet/v2/datetime"
 	"github.com/duke-git/lancet/v2/random"
 	"github.com/levigross/grequests"
-	"github.com/quanxiangsheng/go-api-sdk/utils"
+	"github.com/quan-xiansheng/go-api-sdk/utils"
 )
 
 func (api *ApiClient) GetUsername(id int) string {

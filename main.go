@@ -1,7 +1,7 @@
 package apisdk
 
 import (
-	"github.com/quanxiangsheng/go-api-sdk/api"
+	"github.com/quan-xiansheng/go-api-sdk/api"
 )
 
 func NewApiClient(AccessKey, SecretKey string) *api.ApiClient {
