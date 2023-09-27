@@ -1,14 +1,18 @@
 package api
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/duke-git/lancet/v2/datetime"
 	"github.com/duke-git/lancet/v2/random"
 	"github.com/levigross/grequests"
+	"github.com/quan-xiansheng/go-api-sdk/Response"
 	"github.com/quan-xiansheng/go-api-sdk/utils"
+	"log"
 )
 
-func (api *ApiClient) GetUsername(id int) string {
+func (api *ApiClient) GetUsername(id int) (*Response.Response, error) {
 
 	url := fmt.Sprintf("http://localhost:9001/api/sdk/user/name/%d", id)
 
@@ -28,10 +32,15 @@ func (api *ApiClient) GetUsername(id int) string {
 		Headers: headMap,
 	})
 	if err != nil {
-		return ""
+		return nil, err
 	}
-	return resp.String()
 
+	var jsonResp Response.Response
+	if err := json.Unmarshal(resp.Bytes(), &jsonResp); err != nil {
+		log.Println("解析 JSON 出错:", err.Error())
+		return nil, errors.New("服务繁忙，请稍后再试~~")
+	}
+	return &jsonResp, nil
 }
 
 func (api *ApiClient) GetRandomNum() string {
