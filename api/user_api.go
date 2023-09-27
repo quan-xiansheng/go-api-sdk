@@ -33,3 +33,29 @@ func (api *ApiClient) GetUsername(id int) string {
 	return resp.String()
 
 }
+
+func (api *ApiClient) GetRandomNum() string {
+
+	url := fmt.Sprintf("http://localhost:8888/api/randomNum")
+
+	tm, _ := datetime.NewFormat("2022-03-18 17:04:05")
+	accessKey := api.AccessKey
+	secretKey := api.SecretKey
+	body := fmt.Sprintf("%d", 1)
+	headMap := map[string]string{
+		"accessKey": accessKey,
+		"nonce":     random.RandNumeral(3),
+		"body":      body,
+		"timestamp": tm.ToFormat(),
+		"sign":      utils.GetSign(body, secretKey),
+	}
+
+	resp, err := grequests.Get(url, &grequests.RequestOptions{
+		Headers: headMap,
+	})
+	if err != nil {
+		return ""
+	}
+	return resp.String()
+
+}

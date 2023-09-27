@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/duke-git/lancet/cryptor"
+import "github.com/duke-git/lancet/v2/cryptor"
 
 func GetSign(body string, secreKey string) string {
 
