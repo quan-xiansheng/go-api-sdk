@@ -43,7 +43,7 @@ func (api *ApiClient) GetUsername(id int) (*Response.Response, error) {
 	return &jsonResp, nil
 }
 
-func (api *ApiClient) GetRandomNum() string {
+func (api *ApiClient) GetRandomNum() (*Response.Response, error) {
 
 	url := fmt.Sprintf("http://localhost:8888/api/randomNum")
 
@@ -63,8 +63,13 @@ func (api *ApiClient) GetRandomNum() string {
 		Headers: headMap,
 	})
 	if err != nil {
-		return ""
+		return nil, err
 	}
-	return resp.String()
 
+	var jsonResp Response.Response
+	if err := json.Unmarshal(resp.Bytes(), &jsonResp); err != nil {
+		log.Println("解析 JSON 出错:", err.Error())
+		return nil, errors.New("服务繁忙，请稍后再试~~")
+	}
+	return &jsonResp, nil
 }
