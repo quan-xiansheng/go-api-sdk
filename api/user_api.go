@@ -68,8 +68,7 @@ func (api *ApiClient) GetRandomNum() (*Response.Response, error) {
 
 	var jsonResp Response.Response
 	if err := json.Unmarshal(resp.Bytes(), &jsonResp); err != nil {
-		log.Println("解析 JSON 出错:", err.Error())
-		return nil, errors.New("服务繁忙，请稍后再试~~")
+		return nil, err
 	}
 	return &jsonResp, nil
 }
