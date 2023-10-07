@@ -12,6 +12,8 @@ import (
 	"log"
 )
 
+const INTERFACE_GATEWAY_URL = "http://localhost:8888/api/"
+
 func (api *ApiClient) GetUsername(id int) (*Response.Response, error) {
 
 	url := fmt.Sprintf("http://localhost:9001/api/sdk/user/name/%d", id)
@@ -45,18 +47,18 @@ func (api *ApiClient) GetUsername(id int) (*Response.Response, error) {
 
 func (api *ApiClient) GetRandomNum(interfaceId int64) (*Response.Response, error) {
 
-	url := fmt.Sprintf("http://localhost:8888/api/randomNum")
+	url := fmt.Sprintf(INTERFACE_GATEWAY_URL + "randomNum")
 
 	tm, _ := datetime.NewFormat("2022-03-18 17:04:05")
 	accessKey := api.AccessKey
 	secretKey := api.SecretKey
-	body := fmt.Sprintf("%d", interfaceId)
+	id := fmt.Sprintf("%d", interfaceId)
 	headMap := map[string]string{
-		"accessKey": accessKey,
-		"nonce":     random.RandNumeral(3),
-		"body":      body,
-		"timestamp": tm.ToFormat(),
-		"sign":      utils.GetSign(body, secretKey),
+		"accessKey":   accessKey,
+		"nonce":       random.RandNumeral(3),
+		"interfaceId": id,
+		"timestamp":   tm.ToFormat(),
+		"sign":        utils.GetSign(id, secretKey),
 	}
 
 	resp, err := grequests.Get(url, &grequests.RequestOptions{
