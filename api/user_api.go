@@ -43,14 +43,14 @@ func (api *ApiClient) GetUsername(id int) (*Response.Response, error) {
 	return &jsonResp, nil
 }
 
-func (api *ApiClient) GetRandomNum() (*Response.Response, error) {
+func (api *ApiClient) GetRandomNum(interfaceId int64) (*Response.Response, error) {
 
 	url := fmt.Sprintf("http://localhost:8888/api/randomNum")
 
 	tm, _ := datetime.NewFormat("2022-03-18 17:04:05")
 	accessKey := api.AccessKey
 	secretKey := api.SecretKey
-	body := fmt.Sprintf("%d", 1)
+	body := fmt.Sprintf("%d", interfaceId)
 	headMap := map[string]string{
 		"accessKey": accessKey,
 		"nonce":     random.RandNumeral(3),
