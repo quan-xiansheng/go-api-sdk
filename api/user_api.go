@@ -8,7 +8,7 @@ import (
 	"github.com/duke-git/lancet/v2/random"
 	"github.com/levigross/grequests"
 	"github.com/quan-xiansheng/go-api-sdk/Response"
-	_const "github.com/quan-xiansheng/go-api-sdk/const"
+	_const "github.com/quan-xiansheng/go-api-sdk/constant"
 	"github.com/quan-xiansheng/go-api-sdk/utils"
 	"log"
 )
