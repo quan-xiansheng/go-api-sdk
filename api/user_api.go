@@ -8,11 +8,10 @@ import (
 	"github.com/duke-git/lancet/v2/random"
 	"github.com/levigross/grequests"
 	"github.com/quan-xiansheng/go-api-sdk/Response"
+	_const "github.com/quan-xiansheng/go-api-sdk/const"
 	"github.com/quan-xiansheng/go-api-sdk/utils"
 	"log"
 )
-
-const INTERFACE_GATEWAY_URL = "http://localhost:8888/api/"
 
 func (api *ApiClient) GetUsername(id int) (*Response.Response, error) {
 
@@ -47,8 +46,6 @@ func (api *ApiClient) GetUsername(id int) (*Response.Response, error) {
 
 func (api *ApiClient) GetRandomNum(interfaceId int64) (*Response.Response, error) {
 
-	url := fmt.Sprintf(INTERFACE_GATEWAY_URL + "randomNum")
-
 	tm, _ := datetime.NewFormat("2022-03-18 17:04:05")
 	accessKey := api.AccessKey
 	secretKey := api.SecretKey
@@ -61,7 +58,7 @@ func (api *ApiClient) GetRandomNum(interfaceId int64) (*Response.Response, error
 		"sign":        utils.GetSign(id, secretKey),
 	}
 
-	resp, err := grequests.Get(url, &grequests.RequestOptions{
+	resp, err := grequests.Get(_const.INTERFACE_GATEWAY_URL+"randomNum", &grequests.RequestOptions{
 		Headers: headMap,
 	})
 	if err != nil {
